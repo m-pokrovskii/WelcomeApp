@@ -95,7 +95,7 @@ function success_jsonp(data) {
 				window.finalApps = dataAttr;
 		});
 
-		installedApps('com.qihoo.security');
+		installedApps('com.qihoo.security'); // remove in prodaction.
 }
  
 function fail_jsonp(url) {
