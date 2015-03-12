@@ -135,7 +135,7 @@ var appnextAPP = (function(){
 					window.finalApps = dataAttr;
 			});
 
-			// installedApps('com.qihoo.security'); // remove in prodaction.
+			installedApps('com.qihoo.security'); // remove in prodaction.
 	}
 
 	function fail_jsonp(url) {
@@ -189,11 +189,13 @@ var appnextAPP = (function(){
 					}
 				});
 
-				var jsAppUrl = document.querySelector('.js_app_url');
-				jsAppUrl.addEventListener('click', function(e) {
-						e.preventDefault();
-						window.location = 'appnext://app:' + JSON.stringify(window.finalApps[$(this).data('jsonid')]);
-				})
+				var jsAppUrl = document.querySelectorAll('.js_app_url');
+				for (var i = 0, l = jsAppUrl.length; i < l; i++) {
+						jsAppUrl[i].addEventListener('click', function(e) {
+								e.preventDefault();
+								window.location = 'appnext://app:' + JSON.stringify(window.finalApps[$(this).data('jsonid')]);		
+					});
+				};
 			}
 		});
 		
