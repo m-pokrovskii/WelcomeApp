@@ -165,9 +165,12 @@ var appnextAPP = (function(){
 				document.querySelector('.js-modal_title').setAttributes({
 					html: title
 				})
-				document.querySelector('.js_app_url').setAttributes({
-					'data-jsonid': key1
-				});
+
+				for (var i = 0, jsAppUrl = document.querySelectorAll('.js_app_url'), l = jsAppUrl.length; i < l; i++) {
+					jsAppUrl[i].setAttributes({
+						'data-jsonid': key1
+					});
+				};
 
 				document.querySelector('.js-modal_main_img_itm').setAttributes({
 					src:    val1.urlImg,
@@ -193,7 +196,8 @@ var appnextAPP = (function(){
 				for (var i = 0, l = jsAppUrl.length; i < l; i++) {
 						jsAppUrl[i].addEventListener('click', function(e) {
 								e.preventDefault();
-								window.location = 'appnext://app:' + JSON.stringify(window.finalApps[$(this).data('jsonid')]);		
+								var keyApp = this.getAttribute('data-jsonid');
+								window.location = 'appnext://app:' + JSON.stringify(window.finalApps[keyApp]);		
 					});
 				};
 			}
