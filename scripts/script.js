@@ -217,8 +217,6 @@ var appnextAPP = (function(){
 	}
 
 	function init() {
-		
-		id = '7efc4eaf-a280-4b8c-ab8e-b8ae07944086';
 		if (!id) {
 			return
 		};
