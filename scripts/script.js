@@ -65,12 +65,15 @@ var appnextAPP = (function(){
 
 			var btitle = getURLParameter('btitle');
 			if (btitle === undefined || btitle === '' || btitle === null) btitle = 'Download Free!';
+			if (btitle) {
+				btitle = btitle.substring(0,12);
+			};
 
 			var cat = getURLParameter('cat');
 			if (cat === undefined || cat === '' || cat === null) cat = '';
 
 			var cnt = getURLParameter('cnt');
-			if (cnt === undefined || cnt === '' || cnt === null) cnt = '10';
+			if (cnt === undefined || cnt === '' || cnt === null) cnt = '1';
 
 			var pbk = getURLParameter('pbk');
 			if (pbk === undefined || pbk === '' || pbk === null) pbk = '';
@@ -80,13 +83,15 @@ var appnextAPP = (function(){
 				appn = '';
 			}else{
 				appn = 'Welcome to '+appn+'<br> & Discover this Free App!';
+				appn = appn.substring(0,15);
+				console.log(appn);
 			}
 			var title = getURLParameter('title');
 			if (title === undefined || title === '' || title === null) title = 'Discover this Free App!';
 
 			if (appn!='')
 			{
-				title=appn;
+				title=appn.substring(0,50);
 			}
 
 
@@ -126,6 +131,7 @@ var appnextAPP = (function(){
 	 }
 
 	function success_jsonp(data) {
+		console.log(data);
 			replaceJQ.each(data, function(key, val) {
 					var dataAttr = data[key];
 					replaceJQ.each(dataAttr, function(key, val) {
@@ -135,7 +141,7 @@ var appnextAPP = (function(){
 					window.finalApps = dataAttr;
 			});
 
-			installedApps('com.qihoo.security'); // remove in prodaction.
+			installedApps(); // remove in prodaction.
 	}
 
 	function fail_jsonp(url) {
@@ -148,7 +154,7 @@ var appnextAPP = (function(){
 
 	function installedApps(apps) {
 		var indexes = [];
-
+		console.log(window.finalApps);
 		if (apps) {
 				replaceJQ.each(window.finalApps, function (i, val) {
 				if (apps.split(',').indexOf(val.androidPackage) != -1) {
@@ -220,7 +226,7 @@ var appnextAPP = (function(){
 		if (!id) {
 			return
 		};
-		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?pimp=1&ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"pbk="+pbk, success_jsonp, fail_jsonp);
+		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?pimp=1&ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"&pbk="+pbk, success_jsonp, fail_jsonp);
 		var innerCust  = document.querySelectorAll('.js-modal_inner_cust')[0],
 				skipButton = document.querySelectorAll('.js-modal_itm_info_foot_btn');
 		innerCust.style.backgroundColor = "#"+bgc;
