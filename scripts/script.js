@@ -11,6 +11,7 @@ Element.prototype.setAttributes = function (attrs) {
     }
 };
 
+NodeList.prototype.forEach = Array.prototype.forEach;
 // 
 
 var replaceJQ = (function(){
@@ -54,13 +55,13 @@ var appnextAPP = (function(){
 			pkgNames         = [];
 
 			var id = getURLParameter('android_id');
-			if (id === undefined || id === '' || id === null) id = '61e63949-d69a-4268-8484-c9079341ceaf';
+			if (id === undefined || id === '' || id === null) id = false;
 
 			var bgc = getURLParameter('bgc');
 			if (bgc === undefined || bgc === '' || bgc === null) bgc = 'fff';
 
 			var bcolor = getURLParameter('bcolor');
-			if (bcolor === undefined || bcolor === '' || bcolor === null) bcolor = 'F78D1F';
+			if (bcolor === undefined || bcolor === '' || bcolor === null) bcolor = '';
 
 			var btitle = getURLParameter('btitle');
 			if (btitle === undefined || btitle === '' || btitle === null) btitle = 'Download Free!';
@@ -125,7 +126,6 @@ var appnextAPP = (function(){
 	 }
 
 	function success_jsonp(data) {
-
 			replaceJQ.each(data, function(key, val) {
 					var dataAttr = data[key];
 					replaceJQ.each(dataAttr, function(key, val) {
@@ -159,7 +159,6 @@ var appnextAPP = (function(){
 					window.finalApps.splice(indexes[i], 1);
 				}
 			}
-			
 			window.finalApps.slice(0,1).forEach(function (val1, key1) {
 			if (val1){
 				document.querySelector('.js-modal_title').setAttributes({
@@ -188,7 +187,7 @@ var appnextAPP = (function(){
 				document.querySelector('.js-modal_itm_info_btn').setAttributes({
 					html: btitle,
 					styles: {
-						backgroundColor: '#'+bcolor
+						background: '#'+bcolor
 					}
 				});
 
@@ -203,19 +202,36 @@ var appnextAPP = (function(){
 			}
 		});
 		
-		window.location = 'appnext://ready';
+		get_ready();
 	};
 
-	function init() {
-		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"pbk="+pbk, success_jsonp, fail_jsonp);
-		var innerCust  = document.querySelectorAll('.js-modal_inner_cust')[0],
-				skipButton = document.querySelectorAll('.js-modal_itm_info_foot_btn')[0];
+	function get_ready (argument) {
+		var app = window.finalApps[0],
+				url = app.pixelImp;
 
+		if (app.pixelImp) {
+			return window.location = 'appnext://ready:'+JSON.stringify({pixelImp:url});
+		}
+
+		return window.location = 'appnext://ready';
+	}
+
+	function init() {
+		
+		id = '7efc4eaf-a280-4b8c-ab8e-b8ae07944086';
+		if (!id) {
+			return
+		};
+		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?pimp=1&ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"pbk="+pbk, success_jsonp, fail_jsonp);
+		var innerCust  = document.querySelectorAll('.js-modal_inner_cust')[0],
+				skipButton = document.querySelectorAll('.js-modal_itm_info_foot_btn');
 		innerCust.style.backgroundColor = "#"+bgc;
-		skipButton.addEventListener('click', function(e) {
-			e.preventDefault();
-			window.location = 'appnext://close_appwall';
-		});
+		skipButton.forEach(function(val, key) {
+			val.addEventListener('click', function(e) {
+				e.preventDefault();
+				window.location = 'appnext://close_appwall';
+			});
+		})
 
 		window.installedApps = installedApps;
 		window.dd = 'installedApps';
