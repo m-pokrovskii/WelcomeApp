@@ -78,13 +78,21 @@ var appnextAPP = (function(){
 			var pbk = getURLParameter('pbk');
 			if (pbk === undefined || pbk === '' || pbk === null) pbk = '';
 
+			var device = getURLParameter('device');
+			if (device === undefined || device === '' || device === null) device = '';
+
+			var d = getURLParameter('d');
+			if (d === undefined || d === '' || d === null) d = '';
+
+			var vid = getURLParameter('vid');
+			if (vid === undefined || vid === '' || vid === null) vid = '';
+
 			var appn = getURLParameter('appn');
 			if (appn === undefined || appn === '' || appn === null){
 				appn = '';
 			}else{
 				appn = 'Welcome to '+appn+'<br> & Discover this Free App!';
 				appn = appn.substring(0,15);
-				console.log(appn);
 			}
 			var title = getURLParameter('title');
 			if (title === undefined || title === '' || title === null) title = 'Discover this Free App!';
@@ -131,7 +139,6 @@ var appnextAPP = (function(){
 	 }
 
 	function success_jsonp(data) {
-		console.log(data);
 			replaceJQ.each(data, function(key, val) {
 					var dataAttr = data[key];
 					replaceJQ.each(dataAttr, function(key, val) {
@@ -141,7 +148,7 @@ var appnextAPP = (function(){
 					window.finalApps = dataAttr;
 			});
 
-			installedApps(); // remove in prodaction.
+			// installedApps(); // remove in prodaction.
 	}
 
 	function fail_jsonp(url) {
@@ -154,7 +161,6 @@ var appnextAPP = (function(){
 
 	function installedApps(apps) {
 		var indexes = [];
-		console.log(window.finalApps);
 		if (apps) {
 				replaceJQ.each(window.finalApps, function (i, val) {
 				if (apps.split(',').indexOf(val.androidPackage) != -1) {
