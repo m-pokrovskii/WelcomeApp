@@ -232,7 +232,7 @@ var appnextAPP = (function(){
 		if (!id) {
 			return
 		};
-		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?pimp=1&ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"&pbk="+pbk, success_jsonp, fail_jsonp);
+		scriptRequest("https://admin.appnext.com/offerWallApi.aspx?pimp=1&ext=t&id="+id+"&cnt="+cnt+"&cat="+cat+"&device="+device+"&d="+d+"&vid="+vid+"&pbk="+pbk, success_jsonp, fail_jsonp);
 		var innerCust  = document.querySelectorAll('.js-modal_inner_cust')[0],
 				skipButton = document.querySelectorAll('.js-modal_itm_info_foot_btn');
 		innerCust.style.backgroundColor = "#"+bgc;
