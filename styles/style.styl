@@ -123,6 +123,8 @@ body, .app
 	font-size 1.5em; font-weight 700  
 	height 17%
 	text-align center
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
 	+above("s", orientation: landscape)
 		position relative
 		padding 0 1em 
@@ -178,9 +180,9 @@ body, .app
 .app__app-desc__title
 	font-size 1.5em 
 	font-weight bold
-	white-space nowrap
 	text-align center
-	margin-bottom 0.5em 
+	line-height: 1;
+	margin-bottom 0.5em;
 	+above("s", orientation: landscape)
 		font-size 2em 
 

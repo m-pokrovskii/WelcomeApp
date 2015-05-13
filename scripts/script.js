@@ -91,8 +91,7 @@ var appnextAPP = (function(){
 			if (appn === undefined || appn === '' || appn === null){
 				appn = '';
 			}else{
-				appn = 'Welcome to '+appn+'<br> & Discover this Free App!';
-				appn = appn.substring(0,15);
+				appn = 'Welcome to '+appn.substring(0,15)+'<br> & Discover this Free App!';
 			}
 			var title = getURLParameter('title');
 			if (title === undefined || title === '' || title === null) {
