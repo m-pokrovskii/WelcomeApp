@@ -123,8 +123,7 @@ body, .app
 	font-size 1.5em; font-weight 700  
 	height 17%
 	text-align center
-	-ms-word-wrap: break-word;
-	word-wrap: break-word;
+	word-break break-word
 	+above("s", orientation: landscape)
 		position relative
 		padding 0 1em 
@@ -203,6 +202,7 @@ body, .app
 	text-decoration none
 	color #000
 	padding 1em 3em
+	word-break break-word
 	+above("s", orientation: landscape)
 		font-size 1.5em
 		white-space nowrap
