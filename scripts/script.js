@@ -66,7 +66,7 @@ var appnextAPP = (function(){
 			var btitle = getURLParameter('btitle');
 			if (btitle === undefined || btitle === '' || btitle === null) btitle = 'Download Free!';
 			if (btitle) {
-				btitle = btitle.substring(0,12);
+				btitle = btitle.substring(0, 20);
 			};
 
 			var cat = getURLParameter('cat');
@@ -95,11 +95,15 @@ var appnextAPP = (function(){
 				appn = appn.substring(0,15);
 			}
 			var title = getURLParameter('title');
-			if (title === undefined || title === '' || title === null) title = 'Discover this Free App!';
+			if (title === undefined || title === '' || title === null) {
+				title = 'Discover this Free App!';
+			} else {
+				title = title.substring(0,50);
+			}
 
 			if (appn!='')
 			{
-				title=appn.substring(0,50);
+				title=appn;
 			}
 
 
@@ -173,10 +177,11 @@ var appnextAPP = (function(){
 			}
 			window.finalApps.slice(0,1).forEach(function (val1, key1) {
 			if (val1){
-				document.querySelector('.js-modal_title').setAttributes({
-					html: title
-				})
-
+				document.querySelectorAll('.js-modal_title').forEach(function(element, index){
+						element.setAttributes({
+							html: title
+						});
+				});
 				for (var i = 0, jsAppUrl = document.querySelectorAll('.js_app_url'), l = jsAppUrl.length; i < l; i++) {
 					jsAppUrl[i].setAttributes({
 						'data-jsonid': key1
@@ -188,13 +193,12 @@ var appnextAPP = (function(){
 					onload: document.querySelector('.js-modal_inner_cust').style.display = "",
 					alt:    val1.title
 				});
-
 				document.querySelector('.js-modal_itm_info_title').setAttributes({
-					html: val1.title
+					html: val1.title.substring(0, 25)
 				});
 
 				document.querySelector('.js-modal_itm_info_text').setAttributes({
-					html: val1.desc
+					html: val1.desc.substring(0, 90)
 				});
 				document.querySelector('.js-modal_itm_info_btn').setAttributes({
 					html: btitle,
