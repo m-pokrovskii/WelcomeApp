@@ -55,7 +55,7 @@ var appnextAPP = (function(){
 			pkgNames         = [];
 
 			var id = getURLParameter('android_id');
-			if (id === undefined || id === '' || id === null) id = false;
+			if (id === undefined || id === '' || id === null) id = '7efc4eaf-a280-4b8c-ab8e-b8ae07944086';
 
 			var bgc = getURLParameter('bgc');
 			if (bgc === undefined || bgc === '' || bgc === null) bgc = 'fff';
@@ -151,7 +151,7 @@ var appnextAPP = (function(){
 					window.finalApps = dataAttr;
 			});
 
-			// installedApps(); // remove in prodaction.
+			installedApps(); // remove in prodaction.
 	}
 
 	function fail_jsonp(url) {
